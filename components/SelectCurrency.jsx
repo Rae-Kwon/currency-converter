@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import shortid from 'shortid'
 
 import { useCurrencyForm } from '../hooks/customHooks'
 
-export default function SelectCurrency({ currencies }) {
+const selectConversionType = (type) => {
+    return type === "base" ? "baseCurrencyCode" : "resultCurrencyCode"
+}
+
+export default function SelectCurrency({ currencies, conversionType }) {
     const { inputs, handleInputChange } = useCurrencyForm()
+    const [activeCode, setActiveCode] = useState('')
+
     const currencyCodes = Object.keys(currencies.rates)
     currencyCodes.push(currencies.base)
     currencyCodes.sort()
     console.log(inputs)
     return (
         <form>
-            <select name="currencyCodes" id="" onChange={handleInputChange}>
+            <select name={selectConversionType(conversionType)} value={inputs.baseCurrencyCode || inputs.resultCurrencyCode} onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 
