@@ -21,8 +21,8 @@ export default function Home({ exchangeRates }) {
   return (
     <div>
       <CurrencyForm />
-      <SelectCurrency currencies={exchangeRates}/>
-      <SelectCurrency currencies={exchangeRates}/>
+      <SelectCurrency currencies={exchangeRates} conversionType="base"/>
+      <SelectCurrency currencies={exchangeRates} conversionType="result" />
     </div>
   )
 }
