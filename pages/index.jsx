@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import CurrencyForm from '../components/CurrencyForm'
+import SelectCurrency from '../components/SelectCurrency'
 
 export const getStaticProps = async () => {
   const BASE_URL = fetch(`https://api.exchangeratesapi.io/latest`)
@@ -20,6 +21,8 @@ export default function Home({ exchangeRates }) {
   return (
     <div>
       <CurrencyForm />
+      <SelectCurrency currencies={exchangeRates}/>
+      <SelectCurrency currencies={exchangeRates}/>
     </div>
   )
 }
