@@ -5,11 +5,12 @@ import { useCurrencyForm } from '../hooks/customHooks'
 
 const CurrencyForm = () => {
     const { inputs, handleSubmit, handleInputChange } = useCurrencyForm()
-    console.log(inputs)
+    
+    inputs.baseCurrency = '1'
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="baseCurrency">
-                <input type="number" name="baseCurrency" id="" onChange={handleInputChange}/>
+                <input type="number" name="baseCurrency" value={inputs.baseCurrency} onChange={handleInputChange}/>
             </label>
             
             <label htmlFor="convertedCurrency">
