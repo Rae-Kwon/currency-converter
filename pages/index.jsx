@@ -4,25 +4,21 @@ import CurrencyForm from '../components/CurrencyForm'
 import SelectCurrency from '../components/SelectCurrency'
 
 export const getStaticProps = async () => {
-  const BASE_URL = fetch(`https://api.exchangeratesapi.io/latest`)
-
-  const res = await BASE_URL
-  const exchangeRates = await res.json()
-
+  const res = await fetch('https://api.exchangeratesapi.io/latest')
+  const data = await res.json()
   return {
     props: {
-      exchangeRates
+      data
     }
   }
 }
 
-export default function Home({ exchangeRates }) {
-  console.log(exchangeRates)
+export default function Home({ data }) {
+  console.log(data)
   return (
     <div>
       <CurrencyForm />
-      <SelectCurrency currencies={exchangeRates} conversionType="base"/>
-      <SelectCurrency currencies={exchangeRates} conversionType="result" />
+      <SelectCurrency currencies={data} conversionType="base"/>
     </div>
   )
 }
