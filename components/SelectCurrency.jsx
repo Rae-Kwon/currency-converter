@@ -1,23 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import shortid from 'shortid'
 
 import { useCurrencyForm } from '../hooks/customHooks'
 
-const selectConversionType = (type) => {
-    return type === "base" ? "baseCurrencyCode" : "resultCurrencyCode"
-}
-
 export default function SelectCurrency({ currencies, conversionType }) {
     const { inputs, handleInputChange } = useCurrencyForm()
-    const [activeCode, setActiveCode] = useState('')
+    const [exchangeRates, setExchangeRates] = useState({})
+
+    useEffect(() => {
+        if (inputs.baseCurrencyCode === undefined && inputs.resultCurrencyCode === undefined) {
+            inputs.baseCurrencyCode = 'NZD'
+            inputs.resultCurrencyCode = 'USD'
+        }
+    })
+    
+    useEffect(() => {
+        loadRates()
+    }, [inputs])
+
+    const loadRates = async () => {
+        let res = await fetch(`https://api.exchangeratesapi.io/latest?base=${inputs.baseCurrencyCode}&symbols=${inputs.resultCurrencyCode}`)
+        const data = await res.json()
+        setExchangeRates(data)
+    }
 
     const currencyCodes = Object.keys(currencies.rates)
     currencyCodes.push(currencies.base)
     currencyCodes.sort()
-    console.log(inputs)
+    console.log(exchangeRates)
+
     return (
         <form>
-            <select name={selectConversionType(conversionType)} value={inputs.baseCurrencyCode || inputs.resultCurrencyCode} onChange={handleInputChange}>
+            <select name='baseCurrencyCode' value={inputs.baseCurrencyCode} onChange={handleInputChange}>
+                {currencyCodes.map(code => {
+                    return (
+                        <option 
+                            key={shortid.generate()} 
+                            value={code}>
+                                {code}
+                        </option>
+                    )
+                })}
+            </select>
+
+            <select name='resultCurrencyCode' value={inputs.resultCurrencyCode} onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 
