@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import shortid from 'shortid'
 
 import { useCurrencyForm } from '../hooks/customHooks'
+import { CurrencyContext } from '../CurrencyContext'
 
 export default function SelectCurrency({ currencies, conversionType }) {
     const { inputs, handleInputChange } = useCurrencyForm()
-    const [exchangeRates, setExchangeRates] = useState({})
+    const [exchangeRates, setExchangeRates] = useContext(CurrencyContext)
 
     useEffect(() => {
         if (inputs.baseCurrencyCode === undefined && inputs.resultCurrencyCode === undefined) {
@@ -27,7 +28,6 @@ export default function SelectCurrency({ currencies, conversionType }) {
     const currencyCodes = Object.keys(currencies.rates)
     currencyCodes.push(currencies.base)
     currencyCodes.sort()
-    console.log(exchangeRates)
 
     return (
         <form>
