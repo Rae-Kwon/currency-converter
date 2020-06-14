@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { CurrencyContext } from '../CurrencyContext'
 import { useCurrencyForm } from '../hooks/customHooks'
@@ -8,7 +8,7 @@ const CurrencyForm = () => {
     const { inputs, handleInputChange } = useCurrencyForm()
     const { exchange, input, result } = useContext(CurrencyContext)
     const [exchangeRates] = exchange
-    const [inputCurrency, setInputCurrency] = input
+    const [_, setInputCurrency] = input
     const [resultCurrency, setResultCurrency] = result
 
     useEffect(() => {
