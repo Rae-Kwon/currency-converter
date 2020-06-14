@@ -1,27 +1,39 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
-import { useCurrencyForm } from '../hooks/customHooks'
 import { CurrencyContext } from '../CurrencyContext'
+import { useCurrencyForm } from '../hooks/customHooks'
 
 
 const CurrencyForm = () => {
-    const { inputs, handleSubmit, handleInputChange } = useCurrencyForm()
-    const [exchangeRate] = useContext(CurrencyContext)
-    const [resultCurrency, setResultCurrency] = useState(0)
-    if(exchangeRate.rates === undefined) return <div>Loading...</div>
-    if(exchangeRate.rates !== undefined) {
-        const conversionRates = Object.values(exchangeRate.rates)[0]
+    const { inputs, handleInputChange } = useCurrencyForm()
+    const { exchange, input, result } = useContext(CurrencyContext)
+    const [exchangeRates] = exchange
+    const [inputCurrency, setInputCurrency] = input
+    const [resultCurrency, setResultCurrency] = result
+
+    useEffect(() => {
+        setInputCurrency(inputs.baseCurrency)
+    }, [inputs])
+    
+    if(exchangeRates.rates === undefined) return <div>Loading...</div>
+    if(exchangeRates.rates !== undefined) {
+
+        const conversionRates = Object.values(exchangeRates.rates)[0]
 
         const convertCurrency = (event) => {
             const conversionResult = (event.target.value * conversionRates).toFixed(2)
             setResultCurrency(conversionResult)
         }
-        console.log(inputs)
+        
+        const handleOnChange = (event) => {
+            convertCurrency(event)
+            handleInputChange(event)
+        }
 
         return (
-            <form onSubmit={handleSubmit}>
+            <form>
                 <label htmlFor="baseCurrency">
-                    <input type="number" name="baseCurrency" placeholder="Enter amount" onChange={convertCurrency} />
+                    <input type="number" name="baseCurrency" placeholder="0" onChange={handleOnChange} />
                 </label>
                 
                 <label htmlFor="convertedCurrency">

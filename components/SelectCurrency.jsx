@@ -6,7 +6,10 @@ import { CurrencyContext } from '../CurrencyContext'
 
 export default function SelectCurrency({ currencies, conversionType }) {
     const { inputs, handleInputChange } = useCurrencyForm()
-    const [exchangeRates, setExchangeRates] = useContext(CurrencyContext)
+    const { exchange, result, input } = useContext(CurrencyContext)
+    const [exchangeRates, setExchangeRates] = exchange
+    const [resultCurrency, setResultCurrency] = result
+    const [inputCurrency, setInputCurrency] = input
 
     useEffect(() => {
         if (inputs.baseCurrencyCode === undefined && inputs.resultCurrencyCode === undefined) {
@@ -29,31 +32,48 @@ export default function SelectCurrency({ currencies, conversionType }) {
     currencyCodes.push(currencies.base)
     currencyCodes.sort()
 
-    return (
-        <form>
-            <select name='baseCurrencyCode' value={inputs.baseCurrencyCode} onChange={handleInputChange}>
-                {currencyCodes.map(code => {
-                    return (
-                        <option 
-                            key={shortid.generate()} 
-                            value={code}>
-                                {code}
-                        </option>
-                    )
-                })}
-            </select>
+    if (exchangeRates.rates === undefined) return <div>Loading...</div>
 
-            <select name='resultCurrencyCode' value={inputs.resultCurrencyCode} onChange={handleInputChange}>
-                {currencyCodes.map(code => {
-                    return (
-                        <option 
-                            key={shortid.generate()} 
-                            value={code}>
-                                {code}
-                        </option>
-                    )
-                })}
-            </select>
-        </form>
-    )
+    if(exchangeRates.rates !== undefined) {
+
+        const conversionRates = Object.values(exchangeRates.rates)[0]
+
+        const convertCurrency = () => {
+            const conversionResult = (inputCurrency * conversionRates).toFixed(2)
+            setResultCurrency(conversionResult)
+        }
+
+        const handleOnChange = (event) => {
+            handleInputChange(event)
+            convertCurrency(event)
+        }
+        console.log(resultCurrency)
+        return (
+            <form>
+                <select name='baseCurrencyCode' value={inputs.baseCurrencyCode} onChange={handleOnChange}>
+                    {currencyCodes.map(code => {
+                        return (
+                            <option 
+                                key={shortid.generate()} 
+                                value={code}>
+                                    {code}
+                            </option>
+                        )
+                    })}
+                </select>
+
+                <select name='resultCurrencyCode' value={inputs.resultCurrencyCode} onChange={handleOnChange}>
+                    {currencyCodes.map(code => {
+                        return (
+                            <option 
+                                key={shortid.generate()} 
+                                value={code}>
+                                    {code}
+                            </option>
+                        )
+                    })}
+                </select>
+            </form>
+        )
+    }
 }
