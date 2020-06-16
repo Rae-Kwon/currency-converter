@@ -1,24 +1,45 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 
 import { CurrencyContext } from '../CurrencyContext'
 import { useCurrencyForm } from '../hooks/customHooks'
 
 
 const CurrencyForm = () => {
-    const { inputs, handleInputChange } = useCurrencyForm()
-    const { exchange, input, result } = useContext(CurrencyContext)
+    const { inputs, handleInputChange, convertCurrency } = useCurrencyForm()
+    const { exchange, input, result, resultCode } = useContext(CurrencyContext)
+    const mount = useRef(true)
     const [exchangeRates] = exchange
-    const [_, setInputCurrency] = input
+    const [inputCurrency, setInputCurrency] = input
     const [resultCurrency, setResultCurrency] = result
+    const [resultCurrencyCode, setResultCurrencyCode] = resultCode
 
     useEffect(() => {
-        setInputCurrency(inputs.baseCurrency)
+        // const conversionRates = exchangeRates.rates[resultCurrencyCode]
+        // console.log(conversionRates)
+        console.log("cdm")
+        if (exchangeRates.rates !== undefined) {
+            const conversionRates = exchangeRates.rates[resultCurrencyCode]
+            convertCurrency(inputCurrency, conversionRates)
+        }
+    })
+
+    useEffect(() => {
+        console.log("cdm")
+        if (exchangeRates.rates !== undefined) {
+            const conversionRates = exchangeRates.rates[resultCurrencyCode]
+            convertCurrency(inputCurrency, conversionRates)
+        }
+        if (mount.current) {
+            mount.current = false
+        } else {
+            setInputCurrency(inputs.baseCurrency)
+        }
     }, [inputs])
     
     if(exchangeRates.rates === undefined) return <div>Loading...</div>
     if(exchangeRates.rates !== undefined) {
 
-        const conversionRates = Object.values(exchangeRates.rates)[0]
+        const conversionRates = exchangeRates.rates[resultCurrencyCode]
 
         const convertCurrency = (event) => {
             const conversionResult = (event.target.value * conversionRates).toFixed(2)
@@ -33,7 +54,7 @@ const CurrencyForm = () => {
         return (
             <form>
                 <label htmlFor="baseCurrency">
-                    <input type="number" name="baseCurrency" placeholder="0" onChange={handleOnChange} />
+                    <input type="number" name="baseCurrency" value={inputCurrency} onChange={handleOnChange} />
                 </label>
                 
                 <label htmlFor="convertedCurrency">
