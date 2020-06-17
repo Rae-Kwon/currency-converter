@@ -8,7 +8,7 @@ export const CurrencyProvider = ({ children }) => {
     const [inputCurrency, setInputCurrency] = useState(1)
     const [baseCurrencyCode, setBaseCurrencyCode] = useState("NZD")
     const [resultCurrencyCode, setResultCurrencyCode] = useState("USD")
-    
+
     return (
         <CurrencyContext.Provider value={
                 {

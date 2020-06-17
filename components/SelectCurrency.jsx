@@ -6,12 +6,14 @@ import { CurrencyContext } from '../CurrencyContext'
 
 export default function SelectCurrency({ currencies }) {
     const { inputs, handleInputChange } = useCurrencyForm()
-    const { exchange, result, input, baseCode, resultCode } = useContext(CurrencyContext)
-    const [previousBaseCurrency, setPreviousBaseCurrency] = useState("")
-    const [previousResultCurrency, setPreviousResultCurrency] = useState("")
+    
     const mounted = useRef(true)
+    const [previousBaseCurrency, setPreviousBaseCurrency] = useState("")
+    const [_, setPreviousResultCurrency] = useState("")
+    
+    const { exchange, result, input, baseCode, resultCode } = useContext(CurrencyContext)
     const [exchangeRates, setExchangeRates] = exchange
-    const [resultCurrency, setResultCurrency] = result
+    const [__, setResultCurrency] = result
     const [inputCurrency] = input
     const [baseCurrencyCode, setBaseCurrencyCode] = baseCode
     const [resultCurrencyCode, setResultCurrencyCode] = resultCode
@@ -24,8 +26,6 @@ export default function SelectCurrency({ currencies }) {
         if (mounted.current) {
             mounted.current = false
         } else {
-            console.log("start cdm")
-            console.log("Prev", baseCurrencyCode, inputs.baseCurrencyCode)
             if (previousBaseCurrency !== inputs.baseCurrencyCode) {
                 console.log("loadRate")
                 loadRates()
@@ -43,13 +43,10 @@ export default function SelectCurrency({ currencies }) {
             }
 
             if (exchangeRates.rates !== undefined) {
-                console.log("inside")
                 const conversionRates = exchangeRates.rates[resultCurrencyCode]
                 const conversionResult = (inputCurrency * conversionRates).toFixed(2)
                 setResultCurrency(conversionResult)
             }
-            console.log("PRC", previousBaseCurrency)
-            console.log("end cdm")
         }
     }, [inputs])
 
@@ -64,17 +61,9 @@ export default function SelectCurrency({ currencies }) {
     currencyCodes.push(currencies.base)
     currencyCodes.sort()
 
-    const handleBaseOnChange = (event) => {
-        handleInputChange(event)
-    }
-
-    const handleResultOnChange = (event) => {
-        handleInputChange(event)
-    }
-
     return (
         <form>
-            <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleBaseOnChange}>
+            <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 
@@ -86,7 +75,7 @@ export default function SelectCurrency({ currencies }) {
                 })}
             </select>
 
-            <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleResultOnChange}>
+            <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 

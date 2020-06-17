@@ -6,17 +6,16 @@ import { useCurrencyForm } from '../hooks/customHooks'
 
 const CurrencyForm = () => {
     const { inputs, handleInputChange, convertCurrency } = useCurrencyForm()
-    const { exchange, input, result, resultCode } = useContext(CurrencyContext)
     const mount = useRef(true)
+
+    const { exchange, input, result, resultCode } = useContext(CurrencyContext)
     const [exchangeRates] = exchange
     const [inputCurrency, setInputCurrency] = input
-    const [resultCurrency, setResultCurrency] = result
-    const [resultCurrencyCode, setResultCurrencyCode] = resultCode
+    const [resultCurrency] = result
+    const [resultCurrencyCode] = resultCode
 
     useEffect(() => {
-        // const conversionRates = exchangeRates.rates[resultCurrencyCode]
-        // console.log(conversionRates)
-        console.log("cdm")
+        console.log("UE")
         if (exchangeRates.rates !== undefined) {
             const conversionRates = exchangeRates.rates[resultCurrencyCode]
             convertCurrency(inputCurrency, conversionRates)
@@ -24,11 +23,6 @@ const CurrencyForm = () => {
     })
 
     useEffect(() => {
-        console.log("cdm")
-        if (exchangeRates.rates !== undefined) {
-            const conversionRates = exchangeRates.rates[resultCurrencyCode]
-            convertCurrency(inputCurrency, conversionRates)
-        }
         if (mount.current) {
             mount.current = false
         } else {
@@ -41,13 +35,13 @@ const CurrencyForm = () => {
 
         const conversionRates = exchangeRates.rates[resultCurrencyCode]
 
-        const convertCurrency = (event) => {
-            const conversionResult = (event.target.value * conversionRates).toFixed(2)
-            setResultCurrency(conversionResult)
-        }
+        // const convertCurrency = (event) => {
+        //     const conversionResult = (event.target.value * conversionRates).toFixed(2)
+        //     setResultCurrency(conversionResult)
+        // }
         
         const handleOnChange = (event) => {
-            convertCurrency(event)
+            convertCurrency(event.target.value, conversionRates)
             handleInputChange(event)
         }
 
