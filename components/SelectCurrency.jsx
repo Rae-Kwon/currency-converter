@@ -27,7 +27,6 @@ export default function SelectCurrency({ currencies }) {
             mounted.current = false
         } else {
             if (previousBaseCurrency !== inputs.baseCurrencyCode) {
-                console.log("loadRate")
                 loadRates()
             }
 

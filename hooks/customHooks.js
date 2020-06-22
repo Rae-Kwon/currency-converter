@@ -5,7 +5,7 @@ import { CurrencyContext } from '../CurrencyContext'
 export const useCurrencyForm = () => {
     const [inputs, setInputs] = useState({})
     const { result } = useContext(CurrencyContext)
-    const [resultCurrency, setResultCurrency] = result
+    const [_, setResultCurrency] = result
 
     const handleInputChange = (event) => {
         event.persist()

@@ -15,7 +15,6 @@ const CurrencyForm = () => {
     const [resultCurrencyCode] = resultCode
 
     useEffect(() => {
-        console.log("UE")
         if (exchangeRates.rates !== undefined) {
             const conversionRates = exchangeRates.rates[resultCurrencyCode]
             convertCurrency(inputCurrency, conversionRates)
@@ -34,11 +33,6 @@ const CurrencyForm = () => {
     if(exchangeRates.rates !== undefined) {
 
         const conversionRates = exchangeRates.rates[resultCurrencyCode]
-
-        // const convertCurrency = (event) => {
-        //     const conversionResult = (event.target.value * conversionRates).toFixed(2)
-        //     setResultCurrency(conversionResult)
-        // }
         
         const handleOnChange = (event) => {
             convertCurrency(event.target.value, conversionRates)
