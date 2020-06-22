@@ -4,7 +4,7 @@ import shortid from 'shortid'
 import { useCurrencyForm } from '../hooks/customHooks'
 import { CurrencyContext } from '../CurrencyContext'
 
-export default function SelectCurrency({ currencies }) {
+const SelectCurrency = ({ currencies }) => {
     const { inputs, handleInputChange } = useCurrencyForm()
     
     const mounted = useRef(true)
@@ -88,3 +88,5 @@ export default function SelectCurrency({ currencies }) {
         </form>
     )
 }
+
+export default SelectCurrency
