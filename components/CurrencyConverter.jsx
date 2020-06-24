@@ -6,8 +6,10 @@ import SelectCurrency from "../components/SelectCurrency"
 const CurrencyConverter = ({ data }) => {
     return (
         <div className="converter-container">
-            <CurrencyForm />
-            <SelectCurrency currencies={data} />
+            <div className="currency-converter">
+                <CurrencyForm />
+                <SelectCurrency currencies={data} />
+            </div>
         </div>
     )
 }

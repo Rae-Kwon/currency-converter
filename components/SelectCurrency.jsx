@@ -62,7 +62,7 @@ const SelectCurrency = ({ currencies }) => {
 
     return (
         <form>
-            <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleInputChange}>
+            <select name='baseCurrencyCode' value={baseCurrencyCode} className="base-currency" onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 
@@ -74,7 +74,7 @@ const SelectCurrency = ({ currencies }) => {
                 })}
             </select>
 
-            <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleInputChange}>
+            <select name='resultCurrencyCode' value={resultCurrencyCode} className="result-currency" onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 

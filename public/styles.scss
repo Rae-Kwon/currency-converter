@@ -166,3 +166,36 @@ nav {
     justify-content: center;
     align-items: center;
 }
+
+.currency-converter {
+    margin: 0;
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        padding-bottom: 4em;
+    }
+
+    input {
+        height: 2rem;
+    }
+
+    select {
+        position: relative;
+        width: 5rem;
+        height: 2rem;
+    }
+
+    .base-currency {
+        bottom: 14.5em;
+        left: 15em;
+    }
+
+    .result-currency {
+        bottom: 9.5em;
+        left: 15em;
+    }
+}
