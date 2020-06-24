@@ -61,8 +61,8 @@ const SelectCurrency = ({ currencies }) => {
     currencyCodes.sort()
 
     return (
-        <form>
-            <select name='baseCurrencyCode' value={baseCurrencyCode} className="base-currency" onChange={handleInputChange}>
+        <form className="currency-selector">
+            <select name='baseCurrencyCode' value={baseCurrencyCode} className="base-currency currency-select" onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 
@@ -74,7 +74,7 @@ const SelectCurrency = ({ currencies }) => {
                 })}
             </select>
 
-            <select name='resultCurrencyCode' value={resultCurrencyCode} className="result-currency" onChange={handleInputChange}>
+            <select name='resultCurrencyCode' value={resultCurrencyCode} className="result-currency currency-select" onChange={handleInputChange}>
                 {currencyCodes.map(code => {
                     return (
                         <option 

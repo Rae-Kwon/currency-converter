@@ -190,10 +190,6 @@ nav a:hover {
           align-items: center;
 }
 
-.currency-converter {
-  margin: 0;
-}
-
 .currency-converter form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -204,27 +200,25 @@ nav a:hover {
           flex-direction: column;
 }
 
-.currency-converter label {
-  padding-bottom: 4em;
+.currency-converter .currency-input label {
+  padding-bottom: 2rem;
 }
 
-.currency-converter input {
-  height: 2rem;
+.currency-converter .currency-selector {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.currency-converter select {
-  position: relative;
-  width: 5rem;
-  height: 2rem;
-}
-
-.currency-converter .base-currency {
-  bottom: 14.5em;
-  left: 15em;
-}
-
-.currency-converter .result-currency {
-  bottom: 9.5em;
-  left: 15em;
+.currency-converter .currency-selector .currency-select {
+  height: 3em;
+  width: 5.5em;
 }
 /*# sourceMappingURL=styles.css.map */
