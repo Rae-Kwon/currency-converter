@@ -1,5 +1,6 @@
 $nav-color: red;
 $bg-color: blue;
+$form-height: 1.5rem;
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -168,25 +169,40 @@ nav {
 }
 
 .currency-converter {
-    form {
-        display: flex;
-        flex-direction: column;
+    display: grid;
+    grid-template: 
+    "base baseCode"
+    "result resultCode";
+}
+
+.currency-selector {
+    margin: auto;
+}
+
+.base-currency {
+    grid-area: base;
+    input {
+        height: $form-height
     }
+}
 
-    .currency-input {
-        label {
-            padding-bottom: 2rem;
-        }
+.result-currency {
+    grid-area: result;
+    input {
+        height: $form-height
     }
+}
 
-    .currency-selector {
-        flex-direction: row;
-        display: flex;
-        justify-content: space-between;
+.base-currency-code {
+    grid-area: baseCode;
+    select {
+        height: $form-height;
+    }
+}
 
-        .currency-select {
-            height: 3em;
-            width: 5.5em;
-        }
+.result-currency-code {
+    grid-area: resultCode;
+    select {
+        height: $form-height;
     }
 }

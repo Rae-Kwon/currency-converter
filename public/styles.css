@@ -190,35 +190,45 @@ nav a:hover {
           align-items: center;
 }
 
-.currency-converter form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.currency-converter {
+  display: -ms-grid;
+  display: grid;
+  grid-template: "base baseCode" "result resultCode";
 }
 
-.currency-converter .currency-input label {
-  padding-bottom: 2rem;
+.currency-selector {
+  margin: auto;
 }
 
-.currency-converter .currency-selector {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+.base-currency {
+  grid-area: base;
 }
 
-.currency-converter .currency-selector .currency-select {
-  height: 3em;
-  width: 5.5em;
+.base-currency input {
+  height: 1.5rem;
+}
+
+.result-currency {
+  grid-area: result;
+}
+
+.result-currency input {
+  height: 1.5rem;
+}
+
+.base-currency-code {
+  grid-area: baseCode;
+}
+
+.base-currency-code select {
+  height: 1.5rem;
+}
+
+.result-currency-code {
+  grid-area: resultCode;
+}
+
+.result-currency-code select {
+  height: 1.5rem;
 }
 /*# sourceMappingURL=styles.css.map */

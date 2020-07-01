@@ -62,29 +62,33 @@ const SelectCurrency = ({ currencies }) => {
 
     return (
         <form className="currency-selector">
-            <select name='baseCurrencyCode' value={baseCurrencyCode} className="base-currency currency-select" onChange={handleInputChange}>
-                {currencyCodes.map(code => {
-                    return (
-                        <option 
-                            key={shortid.generate()} 
-                            value={code}>
-                                {code}
-                        </option>
-                    )
-                })}
-            </select>
+            <div className="base-currency-code">
+                <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleInputChange}>
+                    {currencyCodes.map(code => {
+                        return (
+                            <option 
+                                key={shortid.generate()} 
+                                value={code}>
+                                    {code}
+                            </option>
+                        )
+                    })}
+                </select>
+            </div>
 
-            <select name='resultCurrencyCode' value={resultCurrencyCode} className="result-currency currency-select" onChange={handleInputChange}>
-                {currencyCodes.map(code => {
-                    return (
-                        <option 
-                            key={shortid.generate()} 
-                            value={code}>
-                                {code}
-                        </option>
-                    )
-                })}
-            </select>
+            <div className="result-currency-code">
+                <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleInputChange}>
+                    {currencyCodes.map(code => {
+                        return (
+                            <option 
+                                key={shortid.generate()} 
+                                value={code}>
+                                    {code}
+                            </option>
+                        )
+                    })}
+                </select>
+            </div>
         </form>
     )
 }

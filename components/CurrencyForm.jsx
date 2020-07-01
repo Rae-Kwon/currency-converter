@@ -41,13 +41,17 @@ const CurrencyForm = () => {
 
         return (
             <form className="currency-input">
-                <label htmlFor="baseCurrency">
-                    <input type="number" name="baseCurrency" value={inputCurrency} onChange={handleOnChange} />
-                </label>
+                <div className="base-currency">
+                    <label htmlFor="baseCurrency">
+                        <input type="number" name="baseCurrency" value={inputCurrency} onChange={handleOnChange} />
+                    </label>
+                </div>
                 
-                <label htmlFor="convertedCurrency">
-                    <input type="number" name="convertedCurrency" value={resultCurrency} readOnly/>
-                </label>
+                <div className="result-currency">
+                    <label htmlFor="convertedCurrency">
+                        <input type="number" name="convertedCurrency" value={resultCurrency} readOnly/>
+                    </label>
+                </div>
             </form>
         )
     }
