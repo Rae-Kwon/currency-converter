@@ -40,7 +40,8 @@ const CurrencyForm = () => {
         }
 
         return (
-            <form className="currency-input">
+            <div className="currency-input">
+                <form>
                 <div className="base-currency">
                     <label htmlFor="baseCurrency">
                         <input type="number" name="baseCurrency" value={inputCurrency} onChange={handleOnChange} />
@@ -53,6 +54,7 @@ const CurrencyForm = () => {
                     </label>
                 </div>
             </form>
+            </div>
         )
     }
 

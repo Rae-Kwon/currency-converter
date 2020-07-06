@@ -61,35 +61,37 @@ const SelectCurrency = ({ currencies }) => {
     currencyCodes.sort()
 
     return (
-        <form className="currency-selector">
-            <div className="base-currency-code">
-                <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleInputChange}>
-                    {currencyCodes.map(code => {
-                        return (
-                            <option 
-                                key={shortid.generate()} 
-                                value={code}>
-                                    {code}
-                            </option>
-                        )
-                    })}
-                </select>
-            </div>
+        <div className="currency-selector">
+            <form>
+                <div className="base-currency-code">
+                    <select name='baseCurrencyCode' value={baseCurrencyCode} onChange={handleInputChange}>
+                        {currencyCodes.map(code => {
+                            return (
+                                <option 
+                                    key={shortid.generate()} 
+                                    value={code}>
+                                        {code}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </div>
 
-            <div className="result-currency-code">
-                <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleInputChange}>
-                    {currencyCodes.map(code => {
-                        return (
-                            <option 
-                                key={shortid.generate()} 
-                                value={code}>
-                                    {code}
-                            </option>
-                        )
-                    })}
-                </select>
-            </div>
-        </form>
+                <div className="result-currency-code">
+                    <select name='resultCurrencyCode' value={resultCurrencyCode} onChange={handleInputChange}>
+                        {currencyCodes.map(code => {
+                            return (
+                                <option 
+                                    key={shortid.generate()} 
+                                    value={code}>
+                                        {code}
+                                </option>
+                            )
+                        })}
+                    </select>
+                </div>
+            </form>
+        </div>
     )
 }
 

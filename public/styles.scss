@@ -1,6 +1,7 @@
 $nav-color: red;
 $bg-color: blue;
-$form-height: 1.5rem;
+$form-height: 2rem;
+$form-radius: 8px;
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -173,23 +174,27 @@ nav {
     grid-template: 
     "base baseCode"
     "result resultCode";
+    width: 50vw;
 }
 
-.currency-selector {
-    margin: auto;
+.currency-input {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .base-currency {
     grid-area: base;
     input {
-        height: $form-height
+        height: $form-height;
+        border-radius: $form-radius 0 0 $form-radius;
     }
 }
 
 .result-currency {
     grid-area: result;
     input {
-        height: $form-height
+        height: $form-height;
+        border-radius: $form-radius 0 0 $form-radius;
     }
 }
 
@@ -197,12 +202,15 @@ nav {
     grid-area: baseCode;
     select {
         height: $form-height;
+        border-radius: 0 $form-radius $form-radius 0;
     }
 }
 
 .result-currency-code {
     grid-area: resultCode;
+
     select {
         height: $form-height;
+        border-radius: 0 $form-radius $form-radius 0;
     }
 }

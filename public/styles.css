@@ -194,10 +194,16 @@ nav a:hover {
   display: -ms-grid;
   display: grid;
   grid-template: "base baseCode" "result resultCode";
+  width: 50vw;
 }
 
-.currency-selector {
-  margin: auto;
+.currency-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .base-currency {
@@ -205,7 +211,8 @@ nav a:hover {
 }
 
 .base-currency input {
-  height: 1.5rem;
+  height: 2rem;
+  border-radius: 8px 0 0 8px;
 }
 
 .result-currency {
@@ -213,7 +220,8 @@ nav a:hover {
 }
 
 .result-currency input {
-  height: 1.5rem;
+  height: 2rem;
+  border-radius: 8px 0 0 8px;
 }
 
 .base-currency-code {
@@ -221,7 +229,8 @@ nav a:hover {
 }
 
 .base-currency-code select {
-  height: 1.5rem;
+  height: 2rem;
+  border-radius: 0 8px 8px 0;
 }
 
 .result-currency-code {
@@ -229,6 +238,7 @@ nav a:hover {
 }
 
 .result-currency-code select {
-  height: 1.5rem;
+  height: 2rem;
+  border-radius: 0 8px 8px 0;
 }
 /*# sourceMappingURL=styles.css.map */
